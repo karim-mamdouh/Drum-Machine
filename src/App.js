@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+//React
+import { useState } from "react";
+//Styling file
+import "./App.css";
+//Components
+import DrumPad from "./components/DrumPad/DrumPad";
+//Data
+import { pads } from "./data/data";
 
 function App() {
+  const [activePad, setActivePad] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <>
+      <header>
+        <h1 className="text-center my-5 text-white">Drum Machine</h1>
       </header>
-    </div>
+      <main
+        className="flex-grow-1 d-flex flex-column justify-content-center align-items-center"
+        id="drum-machine"
+      >
+        <div>
+          {/* Active drum pad */}
+          <p id="display" className="text-center text-white">
+            <strong>Active Pad:</strong> {activePad}
+          </p>
+          {/* Drum pads */}
+          <div className="d-flex flex-wrap">
+            {pads.map((item) => (
+              <DrumPad pad={item} key={item.id} setActivePad={setActivePad} />
+            ))}
+          </div>
+        </div>
+      </main>
+    </>
   );
 }
 
